@@ -1,0 +1,35 @@
+{
+  "defaultImage": "assets/printers/default.png",
+  "models": [
+    {
+      "id": "920",
+      "match": ["MFC-T920DW", "T920DW", "920"],
+      "image": "assets/printers/920.png"
+    },
+    {
+      "id": "820",
+      "match": ["MFC-T820DW", "T820DW", "820"],
+      "image": "assets/printers/820.png"
+    },
+    {
+      "id": "830",
+      "match": ["MFC-T830DW", "T830DW", "830"],
+      "image": "assets/printers/830.png"
+    },
+    {
+      "id": "4500",
+      "match": ["MFC-T4500DW", "T4500DW", "4500"],
+      "image": "assets/printers/4500.png"
+    },
+    {
+      "id": "l3270cdw",
+      "match": ["MFC-L3270CDW", "L3270CDW", "3270CDW"],
+      "image": "assets/printers/l3270cdw.png"
+    },
+    {
+      "id": "720",
+      "match": ["DCP-T720DW", "T720DW", "720"],
+      "image": "assets/printers/720.png"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "defaultProfile": "handout-color",
+  "profiles": [
+    {
+      "id": "handout-color",
+      "name": "Handout - Color",
+      "description": "A4 color handout using Tray 1, medium quality, with borders.",
+      "printers": [],
+      "paperLayout": {
+        "orientation": "portrait",
+        "pageOrder": "normal",
+        "pagesPerSheet": 1,
+        "borderless": false
+      },
+      "mediaType": "plain",
+      "paperSize": {
+        "type": "A4",
+        "widthMm": null,
+        "heightMm": null
+      },
+      "paperSource": "tray1",
+      "printQuality": {
+        "quality": "medium",
+        "colorMode": "color"
+      },
+      "duplex": {
+        "enabled": false,
+        "binding": null
+      }
+    },
+    {
+      "id": "handout-mono",
+      "name": "Handout - Mono",
+      "description": "A4 black and white handout using Tray 1, medium quality, with borders.",
+      "printers": [],
+      "paperLayout": {
+        "orientation": "portrait",
+        "pageOrder": "normal",
+        "pagesPerSheet": 1,
+        "borderless": false
+      },
+      "mediaType": "plain",
+      "paperSize": {
+        "type": "A4",
+        "widthMm": null,
+        "heightMm": null
+      },
+      "paperSource": "tray1",
+      "printQuality": {
+        "quality": "medium",
+        "colorMode": "grayscale"
+      },
+      "duplex": {
+        "enabled": false,
+        "binding": null
+      }
+    },
+    {
+      "id": "certificate",
+      "name": "Certificate",
+      "description": "Borderless A4 certificate printing on matte paper using the MP Tray at best quality.",
+      "printers": [],
+      "paperLayout": {
+        "orientation": "landscape",
+        "pageOrder": "normal",
+        "pagesPerSheet": 1,
+        "borderless": true
+      },
+      "mediaType": "matte",
+      "paperSize": {
+        "type": "A4",
+        "widthMm": null,
+        "heightMm": null
+      },
+      "paperSource": "mp-tray",
+      "printQuality": {
+        "quality": "best",
+        "colorMode": "color"
+      },
+      "duplex": {
+        "enabled": false,
+        "binding": null
+      }
+    }
+  ]
+}

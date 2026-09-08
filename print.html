@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brother Print Farm</title>
+    <link rel="stylesheet" href="print.css">
+</head>
+
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="assets/logo.png" alt="logo" width="68" height="68">
+                <div>
+                    <div class="brand-name">Brother Print Farm</div>
+                    <div class="brand-version">v8.4.9</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section-title">PRINT WORKFLOW</div>
+            <nav class="steps">
+                <div class="step-indicator active" data-step-indicator="1">
+                    <div class="step-number">1</div>
+                    <div class="step-text"><strong>Document</strong><span>Select PDF</span></div>
+                </div>
+                <div class="step-indicator" data-step-indicator="2">
+                    <div class="step-number">2</div>
+                    <div class="step-text"><strong>Settings</strong><span>Print profile</span></div>
+                </div>
+                <div class="step-indicator" data-step-indicator="3">
+                    <div class="step-number">3</div>
+                    <div class="step-text"><strong>Printers</strong><span>Select machines</span></div>
+                </div>
+                <div class="step-indicator" data-step-indicator="4">
+                    <div class="step-number">4</div>
+                    <div class="step-text"><strong>Print</strong><span>Review & start</span></div>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-label">SYSTEM</div>
+                <div class="system-state">
+                    <span class="system-dot"></span>
+                    <span id="systemStatus">Ready</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <h1 id="pageTitle">Select document</h1>
+                <p id="pageDescription">Choose the PDF you want to distribute.</p>
+            </header>
+
+            <section class="step-page active" id="step1">
+                <div class="content-card">
+                    <div class="card-heading">
+                        <span class="eyebrow">STEP 1</span>
+                        <h2>Select PDF</h2>
+                        <p>Choose the PDF that will be distributed across the printer farm.</p>
+                    </div>
+
+                    <div class="document-picker">
+                        <button id="choosePdfBtn" class="primary-button large-button" type="button">Choose PDF</button>
+                        <div id="selectedFileCard" class="selected-file-card hidden">
+                            <div class="file-icon">PDF</div>
+                            <div class="file-information">
+                                <strong id="selectedFileName">document.pdf</strong>
+                                <span id="selectedFilePath"></span>
+                            </div>
+                            <button id="changePdfBtn" class="secondary-button" type="button">Change</button>
+                        </div>
+                    </div>
+
+                    <div id="documentActions" class="step-actions hidden">
+                        <div></div>
+                        <button id="documentNextBtn" class="primary-button" type="button">Print settings
+                            <span>→</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step-page" id="step2">
+                <div class="content-card">
+                    <div class="card-heading">
+                        <span class="eyebrow">STEP 2</span>
+                        <h2>Print settings</h2>
+                        <p>Select a saved profile. Detailed controls only appear for Custom Settings.</p>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-heading">
+                            <div>
+                                <h3>Print Job</h3>
+                                <p>Number of complete sets required.</p>
+                            </div>
+                        </div>
+                        <div class="settings-grid">
+                            <label class="field">
+                                <span>Total copies</span>
+                                <input id="totalCopies" type="number" min="1" step="1" value="10">
+
+                                <label class="field">
+                                    <span>Pages</span>
+
+                                    <select id="pageSelection" onchange="
+        const field = document.getElementById('customPagesField');
+        const input = document.getElementById('customPages');
+
+        if (this.value === 'custom') {
+            document
+                .getElementById('customPagesField')
+                .classList.remove('hidden');
+
+            input.disabled = false;
+        } else {
+            document
+                .getElementById('customPagesField')
+                .classList.add('hidden');
+
+            input.disabled = true;
+        }
+    ">
+                                        <option value="all">All pages</option>
+                                        <option value="custom">Custom pages</option>
+                                    </select>
+                                </label>
+
+                                <label id="customPagesField" class="field hidden">
+                                    <span>Custom pages</span>
+
+                                    <input id="customPages" type="text" placeholder="e.g. 1, 7-8, 10-35">
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-heading">
+                            <div>
+                                <h3>Print Profile</h3>
+                                <p>Choose Handout Color, Handout Mono, Certificate, or Custom.</p>
+                            </div>
+                        </div>
+                        <div class="settings-grid">
+                            <label class="field field-wide">
+                                <span>Profile</span>
+                                <select id="printProfile">
+                                    <option value="">Custom Settings</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="profile-information">
+                            <strong id="profileName">Custom Settings</strong>
+                            <span id="profileDescription">Configure print settings manually.</span>
+                        </div>
+
+                        <div id="profileSummary" class="profile-summary hidden">
+                            <div class="profile-summary-item"><span>Paper</span><strong
+                                    id="profileSummaryPaper">—</strong></div>
+                            <div class="profile-summary-item"><span>Layout</span><strong
+                                    id="profileSummaryLayout">—</strong></div>
+                            <div class="profile-summary-item"><span>Source</span><strong
+                                    id="profileSummarySource">—</strong></div>
+                            <div class="profile-summary-item"><span>Quality</span><strong
+                                    id="profileSummaryQuality">—</strong></div>
+                            <div class="profile-summary-item"><span>Color</span><strong
+                                    id="profileSummaryColor">—</strong></div>
+                        </div>
+                    </div>
+
+                    <div id="customSettingsPanel" class="custom-settings-panel hidden">
+                        <div class="settings-section">
+                            <div class="section-heading">
+                                <div>
+                                    <h3>Basic</h3>
+                                </div>
+                            </div>
+                            <div class="settings-grid">
+                                <label class="field"><span>Paper size</span><select id="paperSize">
+                                        <option value="A4">A4</option>
+                                        <option value="Letter">Letter</option>
+                                        <option value="Legal">Legal</option>
+                                    </select></label>
+                                <label class="field"><span>Media type</span><select id="mediaType">
+                                        <option value="plain">Plain Paper</option>
+                                        <option value="thin">Thin Paper</option>
+                                        <option value="thick">Thick Paper</option>
+                                        <option value="matte">Matte</option>
+                                        <option value="glossy">Glossy</option>
+                                    </select></label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="section-heading">
+                                <div>
+                                    <h3>Paper Layout</h3>
+                                </div>
+                            </div>
+                            <div class="settings-grid">
+                                <label class="field"><span>Orientation</span><select id="orientation">
+                                        <option value="portrait">Portrait</option>
+                                        <option value="landscape">Landscape</option>
+                                    </select></label>
+                                <label class="field"><span>Page order</span><select id="pageOrder">
+                                        <option value="normal">Normal</option>
+                                        <option value="reverse">Reverse</option>
+                                    </select></label>
+                                <label class="field"><span>Pages per sheet</span><select id="pagesPerSheet">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="4">4</option>
+                                        <option value="6">6</option>
+                                        <option value="9">9</option>
+                                        <option value="16">16</option>
+                                    </select></label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="section-heading">
+                                <div>
+                                    <h3>Paper Source</h3>
+                                </div>
+                            </div>
+                            <div class="settings-grid">
+                                <label class="field"><span>Source</span><select id="paperSource">
+                                        <option value="auto">Auto Select</option>
+                                        <option value="tray1">Tray 1</option>
+                                        <option value="mp-tray">MP Tray</option>
+                                    </select></label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="section-heading">
+                                <div>
+                                    <h3>Print Quality</h3>
+                                </div>
+                            </div>
+                            <div class="settings-grid">
+                                <label class="field"><span>Quality</span><select id="printQuality">
+                                        <option value="draft">Draft</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="best">Best</option>
+                                    </select></label>
+                                <label class="field"><span>Color mode</span><select id="colorMode">
+                                        <option value="grayscale">Grayscale</option>
+                                        <option value="color">Color</option>
+                                    </select></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="secondary-button" data-back="1" type="button">← Back</button>
+                        <button id="settingsNextBtn" class="primary-button" type="button">Choose printers
+                            <span>→</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step-page" id="step3">
+                <div class="content-card">
+                    <div class="card-heading">
+                        <span class="eyebrow">STEP 3</span>
+                        <h2>Select printers</h2>
+                        <p>Profile-assigned printers are selected automatically when configured. You can still change
+                            the selection.</p>
+                    </div>
+
+                    <div class="printer-toolbar">
+                        <strong id="printerSummary">No printers loaded</strong>
+                        <div class="printer-toolbar-actions">
+                            <button id="refreshPrintersBtn" class="secondary-button" type="button">Refresh
+                                printers</button>
+                            <button id="selectAllBtn" class="secondary-button" type="button">Select all</button>
+                        </div>
+                    </div>
+
+                    <div id="printerList" class="printer-grid">
+                        <div class="empty-message">Printers will appear here.</div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="secondary-button" data-back="2" type="button">← Back</button>
+                        <button id="printersNextBtn" class="primary-button" type="button" disabled>Review batch
+                            <span>→</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step-page" id="step4">
+                <div class="content-card">
+                    <div class="card-heading">
+                        <span class="eyebrow">STEP 4</span>
+                        <h2>Review & print</h2>
+                        <p>v4.6.0 dynamically sends one copy at a time. Faster printers can receive more copies.</p>
+                    </div>
+
+                    <div class="review-summary">
+                        <div class="review-summary-item"><span>Total copies</span><strong id="summaryCopies">0</strong>
+                        </div>
+                        <div class="review-summary-item"><span>Selected printers</span><strong
+                                id="summaryPrinters">0</strong></div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-heading">
+                            <div>
+                                <h3>Dynamic distribution</h3>
+                                <p>No fixed split is assigned. Each printer receives only one app copy at a time;
+                                    whichever finishes first gets the next remaining copy.</p>
+                            </div>
+                        </div>
+                        <div id="distributionPreview" class="distribution-preview">
+                            <div class="empty-message">Select printers to see the distribution.</div>
+                        </div>
+                    </div>
+
+                    <div class="real-print-warning">
+                        <strong>Real printing enabled</strong>
+                        <span>Starting this batch sends physical print jobs. You will be notified when each printer
+                            finishes a copy.</span>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="secondary-button" data-back="3" type="button">← Back</button>
+                        <button id="startBtn" class="primary-button print-button" type="button">Start printing</button>
+                    </div>
+                </div>
+
+                <div id="batchStatusCard" class="content-card batch-status-card hidden">
+                    <div class="card-heading compact"><span class="eyebrow">BATCH STATUS</span>
+                        <h2>Print status</h2>
+                    </div>
+                    <div id="statusList" class="status-list">
+                        <div class="empty-message">No batch started.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

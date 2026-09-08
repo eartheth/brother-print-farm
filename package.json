@@ -1,0 +1,59 @@
+{
+  "name": "brother-print-farm",
+  "version": "8.4.9",
+  "description": "Print farm manager for Brother printers",
+  "main": "main.js",
+  "author": "Earth",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron .",
+    "build:x64": "electron-builder --win --x64"
+  },
+  "dependencies": {
+    "pdf-to-printer": "^5.8.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.11.2",
+    "electron": "^42.8.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.seminardd.brotherprintfarm",
+    "productName": "Brother Print Farm",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**",
+      "!working/**",
+      "!electron-v42.0.0-win32-x64/**",
+      "!generate-keys.js",
+      "!license-admin.js",
+      "!private-key.pem",
+      "!*.log"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "BrotherPrintFarm-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Brother Print Farm",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    }
+  }
+}

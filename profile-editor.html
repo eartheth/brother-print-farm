@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Profiles - Brother Print Farm</title>
+    <link rel="stylesheet" href="profile-editor.css">
+</head>
+<body>
+<div class="editor-shell">
+    <header class="editor-header">
+        <div>
+            <div class="eyebrow">BROTHER PRINT FARM</div>
+            <h1>Print Profiles</h1>
+            <p>Edit printer settings without touching JSON.</p>
+        </div>
+        <div class="header-actions">
+            <button id="homeBtn" class="button secondary" type="button">Home</button>
+            <button id="saveBtn" class="button primary" type="button">Save changes</button>
+        </div>
+    </header>
+
+    <main class="editor-main">
+        <aside class="profile-sidebar">
+            <div class="sidebar-heading">
+                <div>
+                    <span class="sidebar-label">PROFILES</span>
+                    <strong id="profileCount">0 profiles</strong>
+                </div>
+                <button id="addProfileBtn" class="icon-button" type="button" title="Add profile">+</button>
+            </div>
+            <div id="profileList" class="profile-list"></div>
+            <div class="sidebar-tip">
+                <strong>Easy mode</strong>
+                Choose a profile, change the settings, then press <b>Save changes</b>.
+            </div>
+        </aside>
+
+        <section class="profile-workspace">
+            <div id="loadingState" class="state-card">Loading profiles…</div>
+
+            <div id="editorContent" class="editor-content hidden">
+                <section class="profile-title-card">
+                    <div class="profile-title-fields">
+                        <label class="field">
+                            <span>Profile name</span>
+                            <input id="profileName" type="text" placeholder="Handout - Color">
+                        </label>
+
+                        <label class="field">
+                            <span>Profile ID</span>
+                            <input id="profileId" type="text" placeholder="handout-color">
+                            <small>Internal name. Letters, numbers, - and _ only.</small>
+                        </label>
+
+                        <label class="field field-wide">
+                            <span>Description</span>
+                            <textarea id="profileDescription" rows="2" placeholder="When should staff use this profile?"></textarea>
+                        </label>
+                    </div>
+
+                    <label class="default-profile-card">
+                        <input id="defaultProfile" type="checkbox">
+                        <div>
+                            <strong>Default profile</strong>
+                            <span>Automatically select this profile for new jobs.</span>
+                        </div>
+                    </label>
+                </section>
+
+                <section class="settings-card">
+                    <div class="card-heading">
+                        <div>
+                            <span class="card-kicker">PAPER</span>
+                            <h2>Paper & layout</h2>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <label class="field">
+                            <span>Paper size</span>
+                            <select id="paperSize">
+                                <option value="A4">A4</option>
+                                <option value="Letter">Letter</option>
+                                <option value="Legal">Legal</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Orientation</span>
+                            <select id="orientation">
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Paper source</span>
+                            <select id="paperSource">
+                                <option value="tray1">Tray 1</option>
+                                <option value="mp-tray">MP Tray</option>
+                                <option value="auto">Auto Select</option>
+                                <option value="main">Main Tray</option>
+                                <option value="manual">Manual Feed</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Media type</span>
+                            <select id="mediaType">
+                                <option value="plain">Plain paper</option>
+                                <option value="thin">Thin paper</option>
+                                <option value="thick">Thick paper</option>
+                                <option value="matte">Matte</option>
+                                <option value="glossy">Glossy</option>
+                                <option value="envelope">Envelope</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Pages per sheet</span>
+                            <select id="pagesPerSheet">
+                                <option value="1">1 page</option>
+                                <option value="2">2 pages</option>
+                                <option value="4">4 pages</option>
+                                <option value="6">6 pages</option>
+                                <option value="9">9 pages</option>
+                                <option value="16">16 pages</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Page order</span>
+                            <select id="pageOrder">
+                                <option value="normal">Normal</option>
+                                <option value="reverse">Reverse</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="toggle-grid">
+                        <label class="toggle-row">
+                            <input id="borderless" type="checkbox">
+                            <div>
+                                <strong>Borderless</strong>
+                                <span>Print without page borders when supported.</span>
+                            </div>
+                        </label>
+
+                        <label class="toggle-row">
+                            <input id="duplex" type="checkbox">
+                            <div>
+                                <strong>Two-sided printing</strong>
+                                <span>Turn OFF for single-sided handouts.</span>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-card">
+                    <div class="card-heading">
+                        <div>
+                            <span class="card-kicker">OUTPUT</span>
+                            <h2>Quality & color</h2>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <label class="field">
+                            <span>Print quality</span>
+                            <select id="printQuality">
+                                <option value="draft">Draft</option>
+                                <option value="medium">Medium</option>
+                                <option value="normal">Normal</option>
+                                <option value="fine">Fine</option>
+                                <option value="best">Best</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Color mode</span>
+                            <select id="colorMode">
+                                <option value="color">Color</option>
+                                <option value="grayscale">Black & white</option>
+                            </select>
+                        </label>
+
+                        <label id="duplexBindingField" class="field">
+                            <span>Two-sided binding</span>
+                            <select id="duplexBinding">
+                                <option value="long-edge">Long edge</option>
+                                <option value="short-edge">Short edge</option>
+                            </select>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-card">
+                    <div class="card-heading printer-card-heading">
+                        <div>
+                            <span class="card-kicker">PRINTERS</span>
+                            <h2>Default printers</h2>
+                        </div>
+
+                        <button
+                            id="refreshProfilePrintersBtn"
+                            class="button secondary compact-button"
+                            type="button"
+                        >
+                            Refresh printers
+                        </button>
+                    </div>
+
+                    <p class="section-help">
+                        Select the printers this profile should choose automatically.
+                        The list comes directly from the printers installed on this computer,
+                        so nobody needs to type Windows printer names manually.
+                    </p>
+
+                    <div class="printer-picker-toolbar">
+                        <strong id="profilePrinterSummary">Loading printers…</strong>
+
+                        <div class="printer-picker-actions">
+                            <button
+                                id="selectAllProfilePrintersBtn"
+                                class="text-button"
+                                type="button"
+                            >
+                                Select all
+                            </button>
+
+                            <button
+                                id="clearProfilePrintersBtn"
+                                class="text-button"
+                                type="button"
+                            >
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        id="profilePrinterList"
+                        class="profile-printer-list"
+                    >
+                        <div class="profile-printer-empty">
+                            Loading Windows printers…
+                        </div>
+                    </div>
+                </section>
+
+                <section class="danger-card">
+                    <div>
+                        <strong>Delete profile</strong>
+                        <span>Remove this profile from the app.</span>
+                    </div>
+                    <button id="deleteProfileBtn" class="button danger" type="button">Delete profile</button>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+</div>
+
+<script src="profile-editor.js"></script>
+</body>
+</html>

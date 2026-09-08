@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test Print - Brother Print Farm</title>
+
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+                Brother Print Farm
+            </div>
+
+            <nav class="top-menu">
+
+                <a href="index.html">
+                    Print Farm
+                </a>
+
+                <a href="test.html" class="active">
+                    Test Print
+                </a>
+
+            </nav>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="page-header">
+
+                <h1>
+                    Test Print
+                </h1>
+
+                <p>
+                    Send a single test page to a printer.
+                </p>
+
+            </div>
+
+
+            <section class="card">
+
+                <label class="field">
+
+                    <span>
+                        Printer
+                    </span>
+
+                    <select id="testPrinter">
+
+                        <option value="">
+                            Loading printers...
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <button id="testPrintBtn" type="button" disabled>
+                    Print Test Page
+                </button>
+
+            </section>
+
+
+            <section id="testStatus" class="card hidden">
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="test.js"></script>
+
+</body>
+
+</html>

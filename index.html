@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brother Print Farm - Jobs</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<div class="home-shell">
+
+    <header class="home-header">
+        <div>
+            <div class="home-eyebrow">BROTHER PRINT FARM</div>
+            <h1>Print Jobs</h1>
+            <p>Track every batch, every copy, and every printer.</p>
+        </div>
+
+        <button id="addJobBtn" class="add-job-button" type="button">
+            + Add Job
+        </button>
+    </header>
+
+    <main class="home-main">
+
+        <section class="job-summary">
+            <div class="summary-card">
+                <span>All Jobs</span>
+                <strong id="allJobsCount">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Printing</span>
+                <strong id="printingJobsCount">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Waiting</span>
+                <strong id="waitingJobsCount">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Completed</span>
+                <strong id="completedJobsCount">0</strong>
+            </div>
+        </section>
+
+        <section class="jobs-card">
+
+            <div class="jobs-table-header">
+                <div>Job</div>
+                <div>Status</div>
+                <div>Progress</div>
+                <div></div>
+            </div>
+
+            <div id="jobsList"></div>
+
+            <div id="emptyJobs" class="empty-jobs">
+                <div class="empty-symbol">+</div>
+                <h2>No jobs yet</h2>
+                <p>Create a print job to get started.</p>
+
+                <button id="emptyAddJobBtn" class="secondary-button" type="button">
+                    Add Job
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="home.js"></script>
+</body>
+</html>
